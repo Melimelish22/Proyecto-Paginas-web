@@ -683,3 +683,22 @@ input[type="submit"]:hover{
 }
 /*--------------------------------------------------------------*/
 
+.BODYSTART{
+    background-image: url("imagenes/fondo.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+
+
+
+.BOTONSTART{
+    text-align: center;
+    padding-top: 70px;
+}
+
+
+

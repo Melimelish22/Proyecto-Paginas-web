@@ -4,8 +4,10 @@ let laser=document.getElementById('laser');
 let explosion=document.getElementById('explosion');
 let live=document.querySelector("i");
 let times= document.getElementById("times");
+let vidasExtras = 0;
 let lives=5;
 let second=60;
+
 setInterval(() => {
     second--;
     times.textContent=second;
@@ -25,6 +27,17 @@ document.addEventListener('click' ,()=>{
     bala.style.left=(nave.getBoundingClientRect().left+40)+'px';
     body.append(bala);
     laser.play();
+    let vidaExtra = document.querySelector('.vida-extra');
+    if (nave.getBoundingClientRect().top <= vidaExtra.getBoundingClientRect().bottom &&
+        nave.getBoundingClientRect().bottom >= vidaExtra.getBoundingClientRect().top &&
+        nave.getBoundingClientRect().left <= vidaExtra.getBoundingClientRect().right &&
+        nave.getBoundingClientRect().right >= vidaExtra.getBoundingClientRect().left) {
+      // Aumentar las vidas extras y actualizar el contador
+      vidasExtras++;
+      live.textContent = lives + vidasExtras;
+      // Eliminar el elemento que regenera la vida
+      vidaExtra.remove();
+    }
 });
 //mov. de disparo
 setInterval(()=>{;
@@ -47,7 +60,7 @@ setInterval(()=>{;
                 getBoundingClientRect().left<=enemigo.
                 getBoundingClientRect().left+80){
                     enemigo.style.backgroundImage=
-                    'url("imagesjuego/explosion.gif")';
+                    'url("imagenes/explosioón.png")';
                     explosion.play();
                     setTimeout(()=>{
                        enemigo.remove();
@@ -89,6 +102,13 @@ setInterval(()=>{
             live.textContent=lives;
             element.remove();
         }
+        if (aparecer % 20 == 0) { // Generar un elemento que regenera la vida cada 20 ciclos
+            let vidaExtra = document.createElement('div');
+            vidaExtra.classList.add('vida-extra');
+            body.append(vidaExtra);
+            vidaExtra.style.left = (Math.random() * (window.innerWidth - 80)) + 'px';
+            vidaExtra.style.top = (Math.random() * (window.innerHeight - 80)) + 'px';
+        }    
     });
 },100);
     
